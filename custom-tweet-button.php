@@ -138,7 +138,7 @@ function shorten_bitly($url, $bitly_key, $bitly_login) {
         $bitly_params = '?login=' . $bitly_login . '&apiKey=' .$bitly_key . '&longUrl=' . urlencode($url);
         $bitly_response = urlopen('http://api.j.mp/v3/shorten' . $bitly_params);
         if ($bitly_response) {
-            $bitly_data = json_decode($response, true);
+            $bitly_data = json_decode($bitly_response, true);
             if (isset($bitly_data['data']['url'])) {
                 $bitly_url = $bitly_data['data']['url'];
             }
