@@ -1,22 +1,28 @@
 <?php
-/* -----------------------------------------------------------------------------------
-TWEET BUTTON using j.mp and twitter APIs
------------------------------------------------------------------------------------ */
-
 /*
- * Custom tweet button for Wordpress
- * HTML and CSS is fully customisable;
- * Displays retweet counts for each post;
- * Automatic URL shortening with bit.ly
- 
- Use in template files:
- 
-   <?php
-       if (function_exists('tweet_button'))
-          tweet_button(get_permalink());
-   ?>
- */
+Project name: Custom Tweet Button for Wordpress
+Project URI: http://nicolasgallagher.com/custom-tweet-button-for-wordpress/
+Description: A fully customisable HTML and CSS Tweet Button for Wordpress build using PHP and the bit.ly and Twitter APIs.
+Version: 0.1
+Author: Nicolas Gallagher
+Author URI: http://nicolasgallagher.com
 
+Copyright 2010 Nicolas Gallagher
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 function tweet_button($url) {
 
