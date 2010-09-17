@@ -1,0 +1,65 @@
+/* CUSTOM TWEET BUTTON
+-------------------------------------------------------------- */
+
+.twitter-share {
+    overflow:hidden;
+    font:bold 12px/1.5 Arial, sans-serif;
+    zoom:1 /* trigger hasLayout in IE < 8 (move to conditional stylesheet) */
+}
+
+/* The link to twitter */
+
+.twitter-button {
+    float:left;
+    position:relative;
+    width:55px;
+    height:20px;
+    overflow:hidden;
+    text-indent:-9000px;
+    background:url(../images/tweet.png);
+}
+
+.twitter-button:hover,
+.twitter-button:focus {
+    background-position:0 -20px;
+}
+
+.twitter-button:active {
+    background-position:0 -40px;
+}
+
+/* The count display */
+
+.twitter-count {
+    position:relative;
+    float:left; 
+    height:18px; 
+    padding:0 6px; 
+    border:1px solid #cbe3f2;
+    margin:0 0 0 7px; 
+    line-height:18px;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+}
+
+/* The count tooltip. Not displayed in IE < 8 */
+
+.twitter-count:before,
+.twitter-count:after {
+    content:"";
+    position:absolute;
+    top:50%; left:0;
+    border-width:5px 5px 5px 0;
+    border-style:solid;
+    border-color:transparent #cbe3f2 transparent;
+    margin:-5px 3px 0 -5px;
+    display:inline-block; /* For Firefox 3.0 */
+}
+
+.twitter-count:after {
+    left:-3px; 
+    border-width:3px 3px 3px 0; 
+    border-right-color:#fff; 
+    margin:-3px 0 0 0;
+}
