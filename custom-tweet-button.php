@@ -101,7 +101,7 @@ function tweet_button($url) {
         ''
         ;
 
-        // HTML for the tweet button
+        // HTML for the tweet button (add "vcount" to "twitter-share" for vertical count)
         $twitter_share = '
         <div class="twitter-share">
             <a class="twitter-button" 

@@ -16,7 +16,7 @@
     height:20px;
     overflow:hidden;
     text-indent:-9000px;
-    background:url(../images/tweet.png);
+    background:url(tweet.png);
 }
 
 .twitter-button:hover,
@@ -49,7 +49,8 @@
 .twitter-count:after {
     content:"";
     position:absolute;
-    top:50%; left:0;
+    top:50%; 
+    left:0;
     border-width:5px 5px 5px 0;
     border-style:solid;
     border-color:transparent #cbe3f2 transparent;
@@ -62,4 +63,40 @@
     border-width:3px 3px 3px 0; 
     border-right-color:#fff; 
     margin:-3px 0 0 0;
+}
+
+/* CUSTOM TWEET BUTTON (Vertical) - Add "vcount" class to "twitter-share"
+-------------------------------------------------------------- */
+
+.vcount {
+    position:relative;
+    padding-top:42px;
+}
+.vcount .twitter-count {
+    position:absolute; 
+    top:0; 
+    left:0; 
+    width:41px; 
+    height:34px; 
+    margin:0; 
+    text-align:center;
+    font:bold 16px/34px Arial, sans-serif;
+}
+
+.vcount .twitter-count:before,
+.vcount .twitter-count:after {
+    top:34px;
+    left:50%;
+    border-width:5px 5px 0 5px;
+    border-style:solid;
+    border-color:#cbe3f2 transparent;
+    margin:0 0 0 -5px;
+    display:inline-block; /* For Firefox 3.0 */
+}
+
+.vcount .twitter-count:after {
+    top:34px; 
+    border-width:3px 3px 0 3px; 
+    border-top-color:#fff; 
+    margin:0 0 0 -3px;
 }
