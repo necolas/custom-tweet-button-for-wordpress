@@ -3,7 +3,7 @@
 Project name: Custom Tweet Button for Wordpress
 Project URI: http://nicolasgallagher.com/custom-tweet-button-for-wordpress/
 Description: A fully customisable HTML and CSS Tweet Button for Wordpress build using PHP and the bit.ly and Twitter APIs.
-Version: 0.1
+Version: 0.2
 Author: Nicolas Gallagher
 Author URI: http://nicolasgallagher.com
 
@@ -35,49 +35,58 @@ function tweet_button($url) {
     // optional: add a related account
     // $twitter_related = "";
     
+    // Count display
+    // 0 - never
+    // 1 - when greater than zero
+    // 2 - always
+    $count_display = 2;
+
     global $post;
     $cache_interval = 60;
+    $refresh_interval = 3660;
     $retweet_count = null;
     $count = 0;
     
-    if (get_post_status($post->ID) == 'publish') {
-        $title = $post->post_title;
-        
-        if ((function_exists('curl_init') || function_exists('file_get_contents')) && function_exists('json_decode')) {
+	if (get_post_status($post->ID) == 'publish') {
+		$title = $post->post_title;
+		
+		if ((function_exists('curl_init') || function_exists('file_get_contents')) && function_exists('json_decode')) {
             // shorten url
-            if (get_post_meta($post->ID, 'bitly_short_url', true) == '') {
-                $short_url = null;
-                $short_url = shorten_bitly($url, $bitly_key, $bitly_login);
-                if ($short_url) {
-                    add_post_meta($post->ID, 'bitly_short_url', $short_url);
-                }
-            }
+			if (get_post_meta($post->ID, 'bitly_short_url', true) == '') {
+				$short_url = null;
+				$short_url = shorten_bitly($url, $bitly_key, $bitly_login);
+				if ($short_url) {
+					add_post_meta($post->ID, 'bitly_short_url', $short_url);
+				}
+			}
             else {
                 $short_url = get_post_meta($post->ID, 'bitly_short_url', true);
             }
-
+            
             // retweet data (twitter API)
-            $retweet_meta = get_post_meta($post->ID, 'retweet_cache', true);
-            if ($retweet_meta != '') {
-                $retweet_pieces = explode(':', $retweet_meta);
-                $retweet_timestamp = (int)$retweet_pieces[0];
-                $retweet_count = (int)$retweet_pieces[1];
-            }
-            // expire retweet cache
-            if ($retweet_count === null || time() > $retweet_timestamp + $cache_interval) {
-                $retweet_response = urlopen('http://urls.api.twitter.com/1/urls/count.json?url=' . urlencode($url));
+			$retweet_meta = get_post_meta($post->ID, 'retweet_cache', true);
+			if ($retweet_meta != '') {
+				$retweet_pieces = explode(':', $retweet_meta);
+				$retweet_timestamp = (int)$retweet_pieces[0];
+				$retweet_count = (int)$retweet_pieces[1];
+			}
+			// expire retweet cache
+			if ($retweet_count === null || time() > $retweet_timestamp + $cache_interval) {
+				$retweet_response = urlopen('http://urls.api.twitter.com/1/urls/count.json?url=' . urlencode($url));
                 if ($retweet_response) {
-                    $retweet_data = json_decode($retweet_response, true);
-                    if (isset($retweet_data['count']) && (int)$retweet_data['count'] >= $retweet_count) {
-                        $retweet_count = $retweet_data['count'];
-                        if ($retweet_meta == '') {
-                            add_post_meta($post->ID, 'retweet_cache', time() . ':' . $retweet_count);
-                        } else {
-                            update_post_meta($post->ID, 'retweet_cache', time() . ':' . $retweet_count);
+    				$retweet_data = json_decode($retweet_response, true);
+    				if (isset($retweet_data['count']) && isset($retweet_data['url']) && $retweet_data['url'] === $url) {
+                        if ((int)$retweet_data['count'] >= $retweet_count || time() > $retweet_timestamp + $refresh_interval) {
+                            $retweet_count = $retweet_data['count'];
+        					if ($retweet_meta == '') {
+        						add_post_meta($post->ID, 'retweet_cache', time() . ':' . $retweet_count);
+        					} else {
+        						update_post_meta($post->ID, 'retweet_cache', time() . ':' . $retweet_count);
+        					}
                         }
-                    }
+    				}
                 }
-            }
+			}
             
             // optional: 
             // manually set the starting number of retweets for a post that existed before the Tweet Button was created
@@ -89,7 +98,7 @@ function tweet_button($url) {
             
             // calculate the total count to display
             $count = $retweet_count + (int)$retweet_count_start;
-        }
+		}
         
         // construct the tweet button query string
         $twitter_params = 
@@ -101,6 +110,10 @@ function tweet_button($url) {
         ''
         ;
 
+        if ($count_display == 1 && $count > 0 || $count_display == 2) {
+            $counter = '<span class="twitter-count">' . $count . '</span>';
+        }
+        
         // HTML for the tweet button (add "vcount" to "twitter-share" for vertical count)
         $twitter_share = '
         <div class="twitter-share">
@@ -109,12 +122,12 @@ function tweet_button($url) {
                title="Share this article on Twitter" 
                href="http://twitter.com/share' . $twitter_params . '" 
                target="_blank">Tweet this article</a>
-            <span class="twitter-count">' . $count . '</span>
+            ' . $counter . '
         </div>
         ';
 
-        echo $twitter_share;
-    }
+    	echo $twitter_share;
+	}
 }
 
 // convert file contents into string

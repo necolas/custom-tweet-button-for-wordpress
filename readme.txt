@@ -26,5 +26,10 @@ if (function_exists('tweet_button'))
 
 == Changelog ==
 
+= 0.2 =
+* Periodic cache refresh.
+* Checks that the Twitter API count data is for the URL that was requested.
+* Control over when the count is displayed with the tweet button
+
 = 0.1 =
-* First version
+* First version.
