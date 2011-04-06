@@ -3,19 +3,23 @@
 
 .twitter-share {
     overflow:hidden;
+    display:inline-block;
     font:bold 12px/1.5 Arial, sans-serif;
-    zoom:1 /* trigger hasLayout in IE < 8 (move to conditional stylesheet) */
+    text-align:center;
+    *display:inline; /* trigger inline-block behaviour in IE < 8 */
+    zoom:1 /* trigger hasLayout in IE < 8 */
 }
 
 /* The link to twitter */
 
-.twitter-button {
+.twitter-button:link,
+.twitter-button:visited {
     float:left;
     position:relative;
+    overflow:hidden;
     width:55px;
     height:20px;
-    overflow:hidden;
-    text-indent:-9000px;
+    text-indent:-999em;
     background:url(tweet.png);
 }
 
@@ -30,73 +34,81 @@
 
 /* The count display */
 
-.twitter-count {
+.twitter-count:link,
+.twitter-count:visited {
     position:relative;
-    float:left; 
+    float:left;
+    min-width:20px;
     height:18px; 
-    padding:0 6px; 
-    border:1px solid #cbe3f2;
+    padding:0 4px; 
+    border:1px solid #cee3f0;
     margin:0 0 0 7px; 
     line-height:18px;
+    text-decoration:none;
+    color:#2a7090;
     -webkit-border-radius:2px;
     -moz-border-radius:2px;
     border-radius:2px;
 }
 
+.twitter-count:hover,
+.twitter-count:focus,
+.twitter-count:active {
+    border:1px solid #9dc6e1;
+    text-shadow:0 1px 0 #fff;
+    color:#30566D;
+    background:#e8f3f9;
+}
+
 /* The count tooltip. Not displayed in IE < 8 */
 
-.twitter-count:before,
-.twitter-count:after {
+.twitter-count:before {
     content:"";
     position:absolute;
     top:50%; 
-    left:0;
-    border-width:5px 5px 5px 0;
-    border-style:solid;
-    border-color:transparent #cbe3f2 transparent;
-    margin:-5px 3px 0 -5px;
-    display:inline-block; /* For Firefox 3.0 */
+    left:-5px;
+    width:5px;
+    height:9px;
+    margin:-4px 0 0;
+    background:url(tweet.png) 0 -60px;
 }
 
-.twitter-count:after {
-    left:-3px; 
-    border-width:3px 3px 3px 0; 
-    border-right-color:#fff; 
-    margin:-3px 0 0 0;
+.twitter-count:hover:before,
+.twitter-count:focus:before,
+.twitter-count:active:before {
+    background-position:-5px -60px;
 }
 
-/* CUSTOM TWEET BUTTON (Vertical) - Add "vcount" class to "twitter-share"
+/* Vertical variant - Add "vcount" class to "twitter-share"
 -------------------------------------------------------------- */
 
 .vcount {
     position:relative;
     padding-top:42px;
 }
+
 .vcount .twitter-count {
     position:absolute; 
     top:0; 
     left:0; 
-    width:41px; 
+    width:45px; 
     height:34px; 
     margin:0; 
     text-align:center;
     font:bold 16px/34px Arial, sans-serif;
 }
 
-.vcount .twitter-count:before,
-.vcount .twitter-count:after {
-    top:34px;
+.vcount .twitter-count:before {
+    top:100%;
     left:50%;
-    border-width:5px 5px 0 5px;
-    border-style:solid;
-    border-color:#cbe3f2 transparent;
-    margin:0 0 0 -5px;
-    display:inline-block; /* For Firefox 3.0 */
+    width:9px;
+    height:5px;
+    margin:0 0 0 -4px;
+    background-position:-10px -60px;
 }
 
-.vcount .twitter-count:after {
-    top:34px; 
-    border-width:3px 3px 0 3px; 
-    border-top-color:#fff; 
-    margin:0 0 0 -3px;
+.vcount .twitter-count:hover:before,
+.vcount .twitter-count:focus:before,
+.vcount .twitter-count:active:before {
+    background-position:-10px -65px;
 }
