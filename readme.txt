@@ -1,4 +1,4 @@
-== Verified working with Wordpress 3.0.1
+== Verified working with Wordpress 3.0.1+
 
 == Requirements
 
@@ -26,10 +26,17 @@ if (function_exists('tweet_button'))
 
 == Changelog ==
 
-= 0.2 =
+= 0.3 [2011/04/07] =
+* Update sprite to use new Twitter bird
+* Count is now a link to a Twitter Search for the URL
+* Display counts between 1000 and 9999 with comma separating the thousands
+* Display counts 10000 and over in 10.0K format
+* More generic Twitter button title and text
+
+= 0.2 [2010/10/24] =
 * Periodic cache refresh.
 * Checks that the Twitter API count data is for the URL that was requested.
 * Control over when the count is displayed with the tweet button
 
-= 0.1 =
+= 0.1 [2010/09/18] =
 * First version.
