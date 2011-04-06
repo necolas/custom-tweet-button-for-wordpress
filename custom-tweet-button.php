@@ -98,20 +98,26 @@ function tweet_button($url) {
             
             // calculate the total count to display
             $count = $retweet_count + (int)$retweet_count_start;
+            if ($count > 9999) {
+                $count = $count / 1000;
+                $count = number_format($count, 1) . 'K';
+            } else {
+                $count = number_format($count);
+            }
         }
         
         // construct the tweet button query string
         $twitter_params = 
         '?text=' . urlencode($title) . '+-' .
         '&amp;url=' . urlencode($short_url) . 
-        '&amp;counturl=' .urlencode($url). 
+        '&amp;counturl=' . urlencode($url) . 
         '&amp;via=' . $twitter_via . 
         //'&amp;related=' . $twitter_related .
         ''
         ;
 
         if ($count_display == 1 && $count > 0 || $count_display == 2) {
-            $counter = '<span class="twitter-count">' . $count . '</span>';
+            $counter = '<a class="twitter-count" href="http://twitter.com/search?q=' . urlencode($url) . '">' . $count . '</a>';
         }
         
         // HTML for the tweet button (add "vcount" to "twitter-share" for vertical count)
