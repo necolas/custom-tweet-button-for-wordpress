@@ -4,7 +4,7 @@ Verified working with WordPress 3.0.1+.
 
 ## Requirements
 
-* Bit.ly account and API key
+* [Bit.ly](http://bit.ly/) account and API key
 * WordPress 3.0.1+
 
 For more info: <http://nicolasgallagher.com/custom-tweet-button-for-wordpress>
@@ -17,7 +17,7 @@ Step 2: Login to your bit.ly account and get your API key from the "settings" pa
 
 Step 3: Include the `custom-tweet-button.php` file in your theme's `functions.php` file.
 
-Step 4: Add the custom Tweet Button CSS to your theme's style.css file and the include the tweet.png image in your theme's image folder. Customise the CSS as you desire and make sure the image is correctly referenced.
+Step 4: Add the custom Tweet Button CSS to your theme's `style.css` file and the include the `tweet.png` image in your theme's image folder. Customise the CSS as you desire and make sure the image is correctly referenced.
 
 Step 5: Call the function `tweet_button` in your template files (e.g. `single.php`) at the position(s) in the HTML you'd like the Tweet Button to appear:
 
