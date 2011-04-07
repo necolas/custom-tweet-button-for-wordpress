@@ -7,7 +7,7 @@ Verified working with WordPress 3.0.1+.
 * Bit.ly account and API key
 * WordPress 3.0.1+
 
-For more info: http://nicolasgallagher.com/custom-tweet-button-for-wordpress
+For more info: <http://nicolasgallagher.com/custom-tweet-button-for-wordpress>
 
 ## Installation
 
