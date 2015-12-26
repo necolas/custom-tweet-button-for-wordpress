@@ -1,5 +1,7 @@
 # Custom tweet button for WordPress
 
+![unmaintained](http://img.shields.io/badge/status-unmaintained-red.png)
+
 Verified working with WordPress 3.0.1+.
 
 ## Requirements
